@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- ═══ Soul in a bottle ═══ -->
+  <ThingDef>
+    <defName>OM_SoulBottle</defName>
+    <label>soul bottle</label>
+    <description>A soul sealed in glass. It does not degrade. Store it in a soul storage to read its bio, or a soul transformer can bind it to a guardian statue.</description>
+    <thingClass>OverlordMagic.Souls.SoulBottle</thingClass>
+    <category>Item</category>
+    <graphicData>
+      <texPath>Overlord/Souls/SoulBottle</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <altitudeLayer>Item</altitudeLayer>
+    <selectable>true</selectable>
+    <useHitPoints>true</useHitPoints>
+    <alwaysHaulable>true</alwaysHaulable>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <rotatable>false</rotatable>
+    <pathCost>14</pathCost>
+    <stackLimit>1</stackLimit>
+    <tradeability>None</tradeability>
+    <thingCategories><li>Items</li></thingCategories>
+    <statBases>
+      <MaxHitPoints>80</MaxHitPoints>
+      <Mass>0.5</Mass>
+      <MarketValue>0</MarketValue>
+      <DeteriorationRate>0</DeteriorationRate>
+      <Flammability>0</Flammability>
+      <Beauty>6</Beauty>
+    </statBases>
+    <comps>
+      <li Class="CompProperties_Forbiddable"/>
+    </comps>
+  </ThingDef>
+
+  <!-- ═══ Soul Storage (2x2) ═══ -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>OM_SoulStorage</defName>
+    <label>soul storage</label>
+    <description>Racks of warded glass that hold soul bottles. Select it to read the stored souls' bios. Link it to a soul transformer (within 12 cells).</description>
+    <thingClass>OverlordMagic.Souls.Building_SoulStorage</thingClass>
+    <graphicData>
+      <texPath>Overlord/Souls/SoulStorage</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(2,2)</drawSize>
+    </graphicData>
+    <size>(2,2)</size>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.5</fillPercent>
+    <castEdgeShadows>true</castEdgeShadows>
+    <rotatable>false</rotatable>
+    <canOverlapZones>false</canOverlapZones>
+    <surfaceType>Item</surfaceType>
+    <designationCategory>Misc</designationCategory>
+    <researchPrerequisites><li>OM_SoulEngineering</li></researchPrerequisites>
+    <statBases>
+      <MaxHitPoints>200</MaxHitPoints>
+      <WorkToBuild>3000</WorkToBuild>
+      <Mass>30</Mass>
+      <Flammability>0.5</Flammability>
+    </statBases>
+    <costList>
+      <Steel>100</Steel>
+      <ComponentIndustrial>3</ComponentIndustrial>
+    </costList>
+    <building>
+      <preventDeteriorationOnTop>true</preventDeteriorationOnTop>
+      <ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
+      <maxItemsInCell>6</maxItemsInCell>
+      <fixedStorageSettings>
+        <filter><thingDefs><li>OM_SoulBottle</li></thingDefs></filter>
+      </fixedStorageSettings>
+      <defaultStorageSettings>
+        <priority>Important</priority>
+        <filter><thingDefs><li>OM_SoulBottle</li></thingDefs></filter>
+      </defaultStorageSettings>
+    </building>
+    <inspectorTabs><li>ITab_Storage</li></inspectorTabs>
+    <placeWorkers><li>PlaceWorker_ShowFacilitiesConnections</li></placeWorkers>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>80</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_Facility">
+        <maxSimultaneous>2</maxSimultaneous>
+        <maxDistance>12</maxDistance>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- ═══ Soul Extractor (2x1) ═══ -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>OM_SoulExtractor</defName>
+    <label>soul extractor</label>
+    <description>Automatically draws out the souls of worthy colonists who die on this map, within half a day of death, and drops them by the linked soul storage. Never fails. Can be set to take allies' souls too, at the cost of their faction's friendship. Must be linked to a soul transformer (within 12 cells).</description>
+    <thingClass>OverlordMagic.Souls.Building_SoulExtractor</thingClass>
+    <graphicData>
+      <texPath>Overlord/Souls/SoulExtractor</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(2,1)</drawSize>
+    </graphicData>
+    <size>(2,1)</size>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.4</fillPercent>
+    <rotatable>false</rotatable>
+    <tickerType>Rare</tickerType>
+    <designationCategory>Misc</designationCategory>
+    <researchPrerequisites><li>OM_SoulEngineering</li></researchPrerequisites>
+    <statBases>
+      <MaxHitPoints>180</MaxHitPoints>
+      <WorkToBuild>4000</WorkToBuild>
+      <Mass>25</Mass>
+      <Flammability>0.5</Flammability>
+    </statBases>
+    <costList>
+      <Steel>80</Steel>
+      <ComponentIndustrial>4</ComponentIndustrial>
+    </costList>
+    <placeWorkers><li>PlaceWorker_ShowFacilitiesConnections</li></placeWorkers>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>200</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_Facility">
+        <maxSimultaneous>1</maxSimultaneous>
+        <maxDistance>12</maxDistance>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- ═══ Soul Transformer (3x2) ═══ -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>OM_SoulTransformer</defName>
+    <label>soul transformer</label>
+    <description>Binds a stored soul to an empty guardian statue. After a day of power, the soul wakes as a guardian: a being of mana with the face, skills and memories of the person it was. Needs a linked soul storage, and a guardian statue sculpted at an art bench.</description>
+    <thingClass>OverlordMagic.Souls.Building_SoulTransformer</thingClass>
+    <graphicData>
+      <texPath>Overlord/Souls/SoulTransformer</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(3,2)</drawSize>
+    </graphicData>
+    <size>(3,2)</size>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>Impassable</passability>
+    <fillPercent>1</fillPercent>
+    <castEdgeShadows>true</castEdgeShadows>
+    <rotatable>false</rotatable>
+    <tickerType>Rare</tickerType>
+    <designationCategory>Misc</designationCategory>
+    <researchPrerequisites><li>OM_SoulTransformation</li></researchPrerequisites>
+    <statBases>
+      <MaxHitPoints>400</MaxHitPoints>
+      <WorkToBuild>12000</WorkToBuild>
+      <Mass>80</Mass>
+      <Flammability>0.3</Flammability>
+    </statBases>
+    <costList>
+      <Steel>150</Steel>
+      <Plasteel>80</Plasteel>
+      <Gold>40</Gold>
+      <ComponentSpacer>3</ComponentSpacer>
+    </costList>
+    <placeWorkers><li>PlaceWorker_ShowFacilitiesConnections</li></placeWorkers>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>500</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_AffectedByFacilities">
+        <linkableFacilities>
+          <li>OM_SoulStorage</li>
+          <li>OM_SoulExtractor</li>
+        </linkableFacilities>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- ═══ Guardian Statue (2x2, sculpted at an art bench) ═══ -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>OM_GuardianStatue</defName>
+    <label>guardian statue</label>
+    <description>A statue carved to receive a soul. Empty, it is a hooded figure and a fine decoration. Once a soul transformer binds a soul to it, it takes on that person's likeness in stone and the soul rests inside it. Press Manifest guardian to build a spirit body: it draws 800 MP from soul batteries and 4000 W of power for two hours, so connect it to a strong grid. If the body runs out of MP or falls, the soul returns here and needs a day before a new body can be made; a fall also cracks the statue to half its durability. If the statue is destroyed, the guardian is gone.</description>
+    <thingClass>OverlordMagic.Souls.Building_GuardianStatue</thingClass>
+    <graphicData>
+      <texPath>Overlord/Souls/StatuePedestal</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(2,2)</drawSize>
+    </graphicData>
+    <drawerType>RealtimeOnly</drawerType>
+    <tickerType>Rare</tickerType>
+    <size>(2,2)</size>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.5</fillPercent>
+    <castEdgeShadows>true</castEdgeShadows>
+    <rotatable>false</rotatable>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <thingCategories><li>BuildingsArt</li></thingCategories>
+    <tradeability>None</tradeability>
+    <stuffCategories>
+      <li>Stony</li>
+      <li>Metallic</li>
+    </stuffCategories>
+    <costStuffCount>200</costStuffCount>
+    <statBases>
+      <MaxHitPoints>400</MaxHitPoints>
+      <WorkToMake>30000</WorkToMake>
+      <Mass>60</Mass>
+      <Beauty>40</Beauty>
+      <Flammability>0</Flammability>
+    </statBases>
+    <recipeMaker>
+      <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+      <workSkill>Artistic</workSkill>
+      <unfinishedThingDef>UnfinishedSculpture</unfinishedThingDef>
+      <effectWorking>Sculpt</effectWorking>
+      <soundWorking>Recipe_Sculpt</soundWorking>
+      <recipeUsers><li>TableSculpting</li></recipeUsers>
+      <researchPrerequisite>OM_SoulScooping</researchPrerequisite>
+    </recipeMaker>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>0</basePowerConsumption>
+        <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- ═══ Soul Batteries ═══ -->
+  <ThingDef ParentName="BuildingBase" Name="OM_SoulBatteryBase" Abstract="True">
+    <thingClass>Building</thingClass>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.5</fillPercent>
+    <rotatable>false</rotatable>
+    <designationCategory>Misc</designationCategory>
+    <researchPrerequisites><li>OM_SoulEngineering</li></researchPrerequisites>
+    <statBases>
+      <MaxHitPoints>150</MaxHitPoints>
+      <WorkToBuild>2500</WorkToBuild>
+      <Flammability>0.5</Flammability>
+    </statBases>
+  </ThingDef>
+
+  <ThingDef ParentName="OM_SoulBatteryBase">
+    <defName>OM_SoulBattery</defName>
+    <label>soul battery</label>
+    <description>Holds up to 1000 MP for guardians, who draw from any powered soul battery on the map. A magic caster fills it by pouring in their own MP (right-click it). Pouring everything leaves the caster exhausted.</description>
+    <graphicData>
+      <texPath>Overlord/Souls/SoulBatterySmall</texPath>
+      <drawSize>(2,1)</drawSize>
+    </graphicData>
+    <size>(2,1)</size>
+    <costList><Steel>70</Steel></costList>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>50</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="OverlordMagic.Souls.CompProperties_SoulBattery">
+        <capacity>1000</capacity>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="OM_SoulBatteryBase">
+    <defName>OM_SoulBatteryLarge</defName>
+    <label>large soul battery</label>
+    <description>Holds up to 3000 MP for guardians, who draw from any powered soul battery on the map. A magic caster fills it by pouring in their own MP (right-click it). Pouring everything leaves the caster exhausted.</description>
+    <graphicData>
+      <texPath>Overlord/Souls/SoulBatteryLarge</texPath>
+      <drawSize>(2,2)</drawSize>
+    </graphicData>
+    <size>(2,2)</size>
+    <costList><Steel>160</Steel></costList>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>100</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="OverlordMagic.Souls.CompProperties_SoulBattery">
+        <capacity>3000</capacity>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- ═══ Soul Invigorator (2x2) ═══ -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>OM_SoulInvigorator</defName>
+    <label>soul invigorator</label>
+    <description>A gestation capsule that returns a superior guardian's soul to its own body, if that body is preserved (not rotting) and has its vital organs. Body and soul are held for a full week of power; the person then wakes, healed. The guardian ends, and its statue remains as a memorial.</description>
+    <thingClass>OverlordMagic.Souls.Building_SoulInvigorator</thingClass>
+    <graphicData>
+      <texPath>Overlord/Souls/SoulInvigorator</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(2,2)</drawSize>
+    </graphicData>
+    <size>(2,2)</size>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>Impassable</passability>
+    <fillPercent>1</fillPercent>
+    <castEdgeShadows>true</castEdgeShadows>
+    <rotatable>false</rotatable>
+    <tickerType>Rare</tickerType>
+    <designationCategory>Misc</designationCategory>
+    <researchPrerequisites><li>OM_SoulInvigoration</li></researchPrerequisites>
+    <statBases>
+      <MaxHitPoints>350</MaxHitPoints>
+      <WorkToBuild>15000</WorkToBuild>
+      <Mass>70</Mass>
+      <Flammability>0.3</Flammability>
+    </statBases>
+    <costList>
+      <Steel>150</Steel>
+      <Plasteel>120</Plasteel>
+      <Gold>60</Gold>
+      <ComponentSpacer>4</ComponentSpacer>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>400</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+    </comps>
+  </ThingDef>
+
+</Defs>

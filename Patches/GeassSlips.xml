@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+	<!-- Geass runaway, lens out: a social interaction can turn into a real command (Don't move, Live, Fight, Die) or one of the old slips
+	     (sleep, wander, forget, drop). Every number is a relative weight; 0 switches an option off; "chance" scales the base accident chance (0.15).
+	     Fight and Die only happen with the "Cruel runaway" switch on. An interaction with no entry here (another mod's) uses the defaults in
+	     GeassSlipExtension, so nothing needs patching for it to work. -->
+
+	<Operation Class="PatchOperationSequence">
+		<success>Always</success>
+		<operations>
+			<!-- Insult: Said in anger. Fight leads. -->
+			<li Class="PatchOperationAddModExtension">
+				<success>Always</success>
+				<xpath>/Defs/InteractionDef[defName="Insult"]</xpath>
+				<value>
+					<li Class="OverlordMagic.Geass.GeassSlipExtension">
+						<chance>1.5</chance>
+						<dontMove>1</dontMove>
+						<fight>3</fight>
+						<live>0</live>
+						<die>0.5</die>
+						<other>0.5</other>
+					</li>
+				</value>
+			</li>
+			<!-- Slight: A cutting remark. -->
+			<li Class="PatchOperationAddModExtension">
+				<success>Always</success>
+				<xpath>/Defs/InteractionDef[defName="Slight"]</xpath>
+				<value>
+					<li Class="OverlordMagic.Geass.GeassSlipExtension">
+						<chance>1.2</chance>
+						<dontMove>1</dontMove>
+						<fight>2</fight>
+						<live>0</live>
+						<die>0.4</die>
+						<other>0.7</other>
+					</li>
+				</value>
+			</li>
+			<!-- DeepTalk: Warm: "Live" leads. -->
+			<li Class="PatchOperationAddModExtension">
+				<success>Always</success>
+				<xpath>/Defs/InteractionDef[defName="DeepTalk"]</xpath>
+				<value>
+					<li Class="OverlordMagic.Geass.GeassSlipExtension">
+						<chance>1</chance>
+						<dontMove>1</dontMove>
+						<fight>0.3</fight>
+						<live>3</live>
+						<die>0.1</die>
+						<other>1</other>
+					</li>
+				</value>
+			</li>
+			<!-- KindWords: Warm: "Live" leads. -->
+			<li Class="PatchOperationAddModExtension">
+				<success>Always</success>
+				<xpath>/Defs/InteractionDef[defName="KindWords"]</xpath>
+				<value>
+					<li Class="OverlordMagic.Geass.GeassSlipExtension">
+						<chance>1</chance>
+						<dontMove>1</dontMove>
+						<fight>0.2</fight>
+						<live>3</live>
+						<die>0.1</die>
+						<other>1</other>
+					</li>
+				</value>
+			</li>
+			<!-- RomanceAttempt: Flustered: "Don't move" leads. -->
+			<li Class="PatchOperationAddModExtension">
+				<success>Always</success>
+				<xpath>/Defs/InteractionDef[defName="RomanceAttempt"]</xpath>
+				<value>
+					<li Class="OverlordMagic.Geass.GeassSlipExtension">
+						<chance>1</chance>
+						<dontMove>3</dontMove>
+						<fight>0.2</fight>
+						<live>1</live>
+						<die>0.2</die>
+						<other>1</other>
+					</li>
+				</value>
+			</li>
+			<!-- MarriageProposal: "Live" leads. -->
+			<li Class="PatchOperationAddModExtension">
+				<success>Always</success>
+				<xpath>/Defs/InteractionDef[defName="MarriageProposal"]</xpath>
+				<value>
+					<li Class="OverlordMagic.Geass.GeassSlipExtension">
+						<chance>1</chance>
+						<dontMove>1</dontMove>
+						<fight>0.1</fight>
+						<live>3</live>
+						<die>0.1</die>
+						<other>0.8</other>
+					</li>
+				</value>
+			</li>
+			<!-- Breakup: A bad end: Fight and Die lead. -->
+			<li Class="PatchOperationAddModExtension">
+				<success>Always</success>
+				<xpath>/Defs/InteractionDef[defName="Breakup"]</xpath>
+				<value>
+					<li Class="OverlordMagic.Geass.GeassSlipExtension">
+						<chance>1.3</chance>
+						<dontMove>1</dontMove>
+						<fight>2</fight>
+						<live>0</live>
+						<die>1</die>
+						<other>0.5</other>
+					</li>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+
+	<!-- Vanilla Social Interactions Expanded (optional). All of its talking goes through the normal interaction call (random chats, the
+	     venting job, the talking jobs), so the runaway reaches it with no code of its own; this only sets what each interaction tends to say. -->
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Vanilla Social Interactions Expanded</li>
+		</mods>
+		<match Class="PatchOperationSequence">
+			<success>Always</success>
+			<operations>
+				<!-- VSIE_Vent: Venting runs on a timer (every few seconds while it lasts), so each roll is lower. -->
+				<li Class="PatchOperationAddModExtension">
+					<success>Always</success>
+					<xpath>/Defs/InteractionDef[defName="VSIE_Vent"]</xpath>
+					<value>
+						<li Class="OverlordMagic.Geass.GeassSlipExtension">
+							<chance>0.6</chance>
+							<dontMove>2</dontMove>
+							<fight>2</fight>
+							<live>0.5</live>
+							<die>1</die>
+							<other>1</other>
+						</li>
+					</value>
+				</li>
+				<!-- VSIE_Discord: A heated exchange. -->
+				<li Class="PatchOperationAddModExtension">
+					<success>Always</success>
+					<xpath>/Defs/InteractionDef[defName="VSIE_Discord"]</xpath>
+					<value>
+						<li Class="OverlordMagic.Geass.GeassSlipExtension">
+							<chance>1.3</chance>
+							<dontMove>1</dontMove>
+							<fight>3</fight>
+							<live>0</live>
+							<die>1</die>
+							<other>0.5</other>
+						</li>
+					</value>
+				</li>
+				<!-- VSIE_Teaching: Teaching: "Live" and "Don't move" lead. -->
+				<li Class="PatchOperationAddModExtension">
+					<success>Always</success>
+					<xpath>/Defs/InteractionDef[defName="VSIE_Teaching"]</xpath>
+					<value>
+						<li Class="OverlordMagic.Geass.GeassSlipExtension">
+							<chance>0.8</chance>
+							<dontMove>2</dontMove>
+							<fight>0.3</fight>
+							<live>3</live>
+							<die>0.1</die>
+							<other>1</other>
+						</li>
+					</value>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+
+</Patch>

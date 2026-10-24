@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+	<!-- Dubs Bad Hygiene (optional): spirit guardians are made of mana. They don't wash, drink or use the toilet,
+	     so the three needs that mod adds (hygiene, bladder, thirst) are switched off for them.
+	     The mod's own "exemptions" list is used: a pawn carrying one of these hediffs has none of its needs. -->
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Dubs Bad Hygiene</li>
+		</mods>
+		<match Class="PatchOperationSequence">
+			<success>Always</success>
+			<operations>
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs/NeedDef[defName="Bladder" or defName="Hygiene" or defName="DBHThirst"]/Exemptions/Hediffs</xpath>
+					<value>
+						<li>OM_Guardian</li>
+						<li>OM_GuardianBound</li>
+						<li>OM_GuardianDormant</li>
+					</value>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+
+</Patch>

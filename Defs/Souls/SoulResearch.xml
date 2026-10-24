@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <ResearchTabDef>
+    <defName>OM_OverlordTab</defName>
+    <label>Overlord</label>
+  </ResearchTabDef>
+
+  <ResearchProjectDef>
+    <defName>OM_SoulScooping</defName>
+    <label>soul scooping</label>
+    <description>Learn to seal the soul of a worthy dead colonist in a bottle by hand (right-click their body within half a day of death), and to sculpt guardian statues. Success depends on the extractor's Intellectual skill.</description>
+    <baseCost>600</baseCost>
+    <techLevel>Medieval</techLevel>
+    <tab>OM_OverlordTab</tab>
+    <researchViewX>0</researchViewX>
+    <researchViewY>0</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>OM_SoulEngineering</defName>
+    <label>soul engineering</label>
+    <description>Powered machines for souls: the soul storage, the automatic soul extractor, and soul batteries that hold MP.</description>
+    <baseCost>2500</baseCost>
+    <techLevel>Industrial</techLevel>
+    <tab>OM_OverlordTab</tab>
+    <prerequisites>
+      <li>OM_SoulScooping</li>
+      <li>Electricity</li>
+    </prerequisites>
+    <researchViewX>1</researchViewX>
+    <researchViewY>0</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>OM_SoulTransformation</defName>
+    <label>soul transformation</label>
+    <description>The soul transformer: bind a stored soul to a guardian statue and wake it as a guardian made of mana.</description>
+    <baseCost>4000</baseCost>
+    <techLevel>Spacer</techLevel>
+    <tab>OM_OverlordTab</tab>
+    <prerequisites>
+      <li>OM_SoulEngineering</li>
+      <li>AdvancedFabrication</li>
+    </prerequisites>
+    <researchViewX>2</researchViewX>
+    <researchViewY>0</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>OM_SoulInvigoration</defName>
+    <label>soul invigoration</label>
+    <description>The soul invigorator: return a superior guardian's soul to its own preserved body. Difficult, endgame technology.</description>
+    <baseCost>7000</baseCost>
+    <techLevel>Spacer</techLevel>
+    <tab>OM_OverlordTab</tab>
+    <prerequisites>
+      <li>OM_SoulTransformation</li>
+    </prerequisites>
+    <researchViewX>3</researchViewX>
+    <researchViewY>0</researchViewY>
+  </ResearchProjectDef>
+</Defs>

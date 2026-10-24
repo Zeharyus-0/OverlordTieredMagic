@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- v17: the laugh that plays while Schatten charges up to go home from a caravan (2 s, the same 2 s as the GIF). -->
+  <SoundDef>
+    <defName>OM_SchattenLaugh</defName>
+    <maxSimultaneous>1</maxSimultaneous>
+    <subSounds>
+      <li>
+        <onCamera>true</onCamera>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>Overlord/Schatten/Laugh</clipPath>
+          </li>
+        </grains>
+        <volumeRange>70~70</volumeRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+
+</Defs>

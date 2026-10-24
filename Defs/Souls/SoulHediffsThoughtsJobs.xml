@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <HediffDef Name="OM_GuardianBase" Abstract="True">
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(0.75, 0.85, 1)</defaultLabelColor>
+    <isBad>false</isBad>
+    <everCurableByItem>false</everCurableByItem>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <stages>
+      <li>
+        <hungerRateFactor>0</hungerRateFactor>
+        <restFallFactor>0</restFallFactor>
+        <totalBleedFactor>0</totalBleedFactor>
+        <statFactors>
+          <GlobalLearningFactor>0</GlobalLearningFactor>
+        </statFactors>
+      </li>
+    </stages>
+    <comps>
+      <li Class="OverlordMagic.Souls.HediffCompProperties_GuardianMana"/>
+    </comps>
+  </HediffDef>
+
+  <HediffDef ParentName="OM_GuardianBase">
+    <defName>OM_Guardian</defName>
+    <label>spirit guardian</label>
+    <description>A soul in a see-through body of mana, at half their living Isekai level. Works normally. Does not eat, sleep, age, learn or have children, and accepts no surgery. Wounds leak mana instead of blood; mana is drawn from soul batteries. At 0 MP the soul returns to its statue. Only worthy souls keep a social life.</description>
+  </HediffDef>
+
+  <HediffDef ParentName="OM_GuardianBase">
+    <defName>OM_GuardianBound</defName>
+    <label>bound guardian</label>
+    <description>A soul in a see-through body of mana, at half their living Isekai level, bound to the skills that made it worthy. Can only do work tied to those skills, and has no social life. Does not eat, sleep, age, learn or have children, and accepts no surgery. Runs on mana from soul batteries; at 0 MP the soul returns to its statue.</description>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>OM_GuardianDormant</defName>
+    <label>dormant</label>
+    <description>The guardian's body has come apart and is slowly re-forming around its statue. It wakes after a day. If it fell dormant from lack of mana, fill a soul battery or it will sleep again.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(0.6, 0.6, 0.9)</defaultLabelColor>
+    <isBad>true</isBad>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <stages>
+      <li>
+        <capMods>
+          <li><capacity>Consciousness</capacity><setMax>0.1</setMax></li>
+        </capMods>
+      </li>
+    </stages>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>60000</disappearsAfterTicks>
+        <showRemainingTime>true</showRemainingTime>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>OM_ExtractedSoul</defName>
+    <label>extracted soul</label>
+    <description>This body's soul was taken. It cannot wake or move on its own.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(0.5, 0.5, 0.6)</defaultLabelColor>
+    <isBad>true</isBad>
+    <everCurableByItem>false</everCurableByItem>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <stages>
+      <li>
+        <capMods>
+          <li><capacity>Consciousness</capacity><setMax>0.1</setMax></li>
+          <li><capacity>Moving</capacity><setMax>0</setMax></li>
+        </capMods>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>OM_ManaExhaustion</defName>
+    <label>mana exhaustion</label>
+    <description>Poured every last drop of MP into a soul battery.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>true</isBad>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <stages>
+      <li>
+        <capMods>
+          <li><capacity>Consciousness</capacity><offset>-0.2</offset></li>
+        </capMods>
+      </li>
+    </stages>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>30000</disappearsAfterTicks>
+        <showRemainingTime>true</showRemainingTime>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <ThoughtDef>
+    <defName>OM_SoulRefused</defName>
+    <durationDays>3</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>a soul refused</label>
+        <description>I attempted to extract a soul, but it refused.</description>
+        <baseMoodEffect>-5</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>OM_ManaDrained</defName>
+    <durationDays>1</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>drained of mana</label>
+        <description>I poured all my mana into a soul battery. I feel hollow.</description>
+        <baseMoodEffect>-4</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <JobDef>
+    <defName>OM_ExtractSoul</defName>
+    <driverClass>OverlordMagic.Souls.JobDriver_ExtractSoul</driverClass>
+    <reportString>extracting TargetA's soul.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+  </JobDef>
+
+  <JobDef>
+    <defName>OM_DonateMana</defName>
+    <driverClass>OverlordMagic.Souls.JobDriver_DonateMana</driverClass>
+    <reportString>pouring MP into TargetA.</reportString>
+  </JobDef>
+
+  <TraitDef>
+    <defName>OM_Worthy</defName>
+    <commonality>0.25</commonality>
+    <degreeDatas>
+      <li>
+        <label>worthy soul</label>
+        <description>[PAWN_nameDef] has a soul of rare weight. If [PAWN_pronoun] dies at rank A or higher, [PAWN_possessive] soul can return as a worthy-soul guardian: the only kind that keeps a social life and can one day be revived into [PAWN_possessive] own body.</description>
+      </li>
+    </degreeDatas>
+  </TraitDef>
+
+</Defs>
